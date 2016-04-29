@@ -1,0 +1,48 @@
+/* line 1, ../sass/_menu.sass */
+.navbar-fixed-left {
+  background-image: none;
+  background-color: #424242;
+  width: 200px;
+  position: fixed;
+  border-radius: 0;
+  height: 100%;
+  left: 0;
+}
+/* line 9, ../sass/_menu.sass */
+.navbar-fixed-left ul {
+  width: 100%;
+}
+/* line 11, ../sass/_menu.sass */
+.navbar-fixed-left ul li {
+  padding-top: 10px;
+  float: none;
+}
+/* line 14, ../sass/_menu.sass */
+.navbar-fixed-left ul li a {
+  text-align: center;
+  color: #fff;
+  font-weight: bolder;
+}
+/* line 18, ../sass/_menu.sass */
+.navbar-fixed-left ul li a:hover {
+  color: #424242;
+}
+/* line 20, ../sass/_menu.sass */
+.navbar-fixed-left ul li .dropdown-menu {
+  margin-top: -50px;
+  margin-left: 200px;
+}
+
+/* line 5, ../sass/main.sass */
+html, body {
+  height: 100%;
+  background-color: #1490ab;
+  background: url("http://smashingyolo.com/wp-content/uploads/2014/05/Best-Website-Background-Images10.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* line 13, ../sass/main.sass */
+.content {
+  margin-left: 200px;
+  padding: 100px;
+}
