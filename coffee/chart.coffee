@@ -26,9 +26,40 @@ optionsPointsPercent = {
   series: []
 }
 
+optionsPlacePercent = {
+  title: text: ''
+  tooltip: valueSuffix: '.'
+  chart:
+    renderTo: 'place_percent_chart'
+    type: 'line'
+  xAxis: title: text: 'Match #'
+  yAxis: title: text: '% of points of 1. place'
+  legend:
+    layout: 'vertical'
+    align: 'right'
+  series: []
+}
+
+optionsPlace = {
+  title: text: ''
+  tooltip: valueSuffix: '.'
+  chart:
+    renderTo: 'place_chart'
+    type: 'line'
+  xAxis: title: text: 'Match #'
+  yAxis:
+    title: text: 'Place'
+    reversed: true
+    categories: [0,  1, 2, 3, 4, 5, 6, 7, 8, 9, 10,  11,  12,  13,  14,  15,  16,  17]
+  legend:
+    layout: 'vertical'
+    align: 'right'
+  series: []
+}
+
 $.getJSON 'http://www.openligadb.de/api/getmatchdata/bl1/2015', (matchArray) ->
 
-  teams = []
+  teams = [] # [team: [match: points]]
 
   for match in matchArray
     team1 = match.Team1.TeamName
@@ -60,6 +91,17 @@ $.getJSON 'http://www.openligadb.de/api/getmatchdata/bl1/2015', (matchArray) ->
     teams[team1].push pointsTeam1
     teams[team2].push pointsTeam2
 
+  maxPoints = []
+
+  for team, points of teams
+    match = 0
+    for p in points
+      if !maxPoints[match]
+        maxPoints[match] = 0
+      if p > maxPoints[match]
+        maxPoints[match] = p
+      match++
+
   # TODO sort, then map to positionin table for given day
   # Set data points'for points
   for team, points of teams
@@ -74,5 +116,55 @@ $.getJSON 'http://www.openligadb.de/api/getmatchdata/bl1/2015', (matchArray) ->
         game++
         return p / (game * 3) * 100
     }
+    game = 0
+    optionsPlacePercent.series.push {
+      name: team
+      data: points.map (p) ->
+        p / (maxPoints[game++])
+    }
+
+
+  # [teams: [points]] -> [match: [team: points]]
+  matches = []
+  for team, points of teams
+    game = 0
+    for p in points
+      if !matches[game]
+        matches[game] = []
+      matches[game++][team] = p
+
+  # [match: [team: points]] -> [teams: [position]]
+  positions = []
+  console.log matches
+  matchNum = 0
+  for match in matches
+    position = 1
+    max = {team: '', points: 0}
+    while (max.points != -1)
+      max.points = -1
+      for team, points of match
+        if points > max.points
+          max.points = points
+          max.team = team
+      if !positions[max.team]
+        positions[max.team] = []
+      positions[max.team][matchNum] = position++
+      match[max.team] = -1
+    matchNum++
+  console.log positions
+
+  console.log positions
+  for team, pos of positions
+    optionsPlace.series.push {
+      name: team
+      data: pos.map (p) ->
+        if p == 19 # (temp) fix for weird glitch
+          18
+        else
+          p
+    }
+
   new Highcharts.Chart(optionsPoints)
   new Highcharts.Chart(optionsPointsPercent)
+  new Highcharts.Chart(optionsPlacePercent)
+  new Highcharts.Chart(optionsPlace)

@@ -46,3 +46,8 @@ html, body {
   margin-left: 200px;
   padding: 100px;
 }
+
+/* line 17, ../sass/main.sass */
+.chart {
+  height: 600px;
+}
