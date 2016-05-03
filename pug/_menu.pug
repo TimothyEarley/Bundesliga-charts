@@ -1,17 +1,19 @@
-.navbar.navbar-fixed-left
-	//- TODO image
-	a.navbar-brand(href='#') Home
+.navbar.navbar-dark.navbar-fixed-left
+	a.brand(href='#'): img(src='../assets/brand.png')
 
-	ul.nav.navbar-nav
-		li: a(href='#') Link2
-		li: a(href='#') Link3
-		li: a(href='#') Link4
-		li: a(href='#') Link5
+	ul.nav.navbar-nav(id='links')
+		//- TODO fix SASS
+		li: a.nav-link(href='#') Item One
+		li.dropdown-switch
+			.nav-link(href='#') Kurven
+				ul.dropdown
+					//TODO link to üpages with options -> read in script
+					li: a.nav-link(href='#') 15/16
+					li: a.nav-link(href='#') 14/15
+					li: a.nav-link(href='#') 13/14
+		li: a.nav-link(href='#') Item Two
+		li: a.nav-link(href='#') Item Three
 
-//- collapse
-
-//- .collapse(id='navbar')
-//- button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbar') &#9776;
 
 
 //- Example:

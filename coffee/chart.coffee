@@ -135,7 +135,6 @@ $.getJSON 'http://www.openligadb.de/api/getmatchdata/bl1/2015', (matchArray) ->
 
   # [match: [team: points]] -> [teams: [position]]
   positions = []
-  console.log matches
   matchNum = 0
   for match in matches
     position = 1
@@ -151,9 +150,7 @@ $.getJSON 'http://www.openligadb.de/api/getmatchdata/bl1/2015', (matchArray) ->
       positions[max.team][matchNum] = position++
       match[max.team] = -1
     matchNum++
-  console.log positions
 
-  console.log positions
   for team, pos of positions
     optionsPlace.series.push {
       name: team

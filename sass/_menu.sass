@@ -1,22 +1,83 @@
+// .navbar-fixed-left
+//   background-color: $navColor
+//   width: $navWidth
+//   position: fixed
+//   border-radius: 0
+//   height: 100%
+//   left: 0
+//   ul
+//     position: relative
+//     width: 100%
+//     li
+//       margin-top: 20px
+//       padding-top: 10px
+//       padding-bottom: 10px
+//       text-align: center
+//       padding-top: 10px
+//       float: none
+//       &, a
+//         color: $navItemColor
+//         text-decoration: none
+//         font-weight: bolder
+//         &:hover
+//           color: $navItemColorHover
+//       .dropdown-menu
+//         margin-top: -50px
+//         margin-left: $navWidth
+//
+//
+
 .navbar-fixed-left
-  background-image: none
-  background-color: $navColor
-  width: $navWidth
+  // Position
   position: fixed
-  border-radius: 0
-  height: 100%
   left: 0
+  width: $navWidth
+  height: 100%
+  padding: 0px
+  padding-top: $navTopPadding
+  // Style
+  background-color: $navColor
+  border-radius: 0
+  border-right: $navBorderWidth solid $navBorderColor
   ul
-    width: 100%
+    margin-top: 50px
     li
-      padding-top: 10px
-      float: none
-      a
-        text-align: center
-        color: $navItemColor
-        font-weight: bolder
+      width: 100%
+      text-align: center
+      .nav-link
+        padding-top: $navlinkPadding
+        padding-bottom: $navlinkPadding
+        margin-top: $navlinkMargin
+        margin-bottom: $navlinkMargin
+        background-color: $navlinkBGColor
+        border: $navlinkBorderWidth $navlinkBorderColor solid
+        border-left: 0px
+        border-right: 0px
         &:hover
-          color: $navItemColorHover
-      .dropdown-menu
-        margin-top: -50px
-        margin-left: $navWidth
+          background-color: $navlinkHoverColor
+
+
+li.dropdown-switch
+  &:hover
+    .dropdown
+      display: block
+
+
+ul.dropdown
+  display: none
+  list-style: none
+  padding-left: $dropdownPadding
+  padding-right: $dropdownPadding
+  margin-top: 0px
+  li
+    width: 100%
+
+
+
+a.brand
+  padding: 0px
+  img
+    width: $navWidth / 2
+    margin-left: $navWidth / 4
+    background-color: white
+    border-radius: 10px

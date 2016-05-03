@@ -199,7 +199,6 @@
       }
     }
     positions = [];
-    console.log(matches);
     matchNum = 0;
     for (l = 0, len3 = matches.length; l < len3; l++) {
       match = matches[l];
@@ -225,8 +224,6 @@
       }
       matchNum++;
     }
-    console.log(positions);
-    console.log(positions);
     for (team in positions) {
       pos = positions[team];
       optionsPlace.series.push({

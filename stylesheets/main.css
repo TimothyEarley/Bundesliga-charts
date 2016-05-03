@@ -1,36 +1,68 @@
-/* line 1, ../sass/_menu.sass */
+/* line 30, ../sass/_menu.sass */
 .navbar-fixed-left {
-  background-image: none;
-  background-color: #424242;
-  width: 200px;
   position: fixed;
-  border-radius: 0;
-  height: 100%;
   left: 0;
+  width: 200px;
+  height: 100%;
+  padding: 0px;
+  padding-top: 50px;
+  background-color: rgba(26, 26, 26, 0.8);
+  border-radius: 0;
+  border-right: 2px solid #000;
 }
-/* line 9, ../sass/_menu.sass */
+/* line 42, ../sass/_menu.sass */
 .navbar-fixed-left ul {
+  margin-top: 50px;
+}
+/* line 44, ../sass/_menu.sass */
+.navbar-fixed-left ul li {
+  width: 100%;
+  text-align: center;
+}
+/* line 47, ../sass/_menu.sass */
+.navbar-fixed-left ul li .nav-link {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: rgba(112, 112, 112, 0.54);
+  border: 2px #000 solid;
+  border-left: 0px;
+  border-right: 0px;
+}
+/* line 56, ../sass/_menu.sass */
+.navbar-fixed-left ul li .nav-link:hover {
+  background-color: rgba(77, 75, 75, 0.72);
+}
+
+/* line 62, ../sass/_menu.sass */
+li.dropdown-switch:hover .dropdown {
+  display: block;
+}
+
+/* line 66, ../sass/_menu.sass */
+ul.dropdown {
+  display: none;
+  list-style: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 0px;
+}
+/* line 72, ../sass/_menu.sass */
+ul.dropdown li {
   width: 100%;
 }
-/* line 11, ../sass/_menu.sass */
-.navbar-fixed-left ul li {
-  padding-top: 10px;
-  float: none;
+
+/* line 77, ../sass/_menu.sass */
+a.brand {
+  padding: 0px;
 }
-/* line 14, ../sass/_menu.sass */
-.navbar-fixed-left ul li a {
-  text-align: center;
-  color: #fff;
-  font-weight: bolder;
-}
-/* line 18, ../sass/_menu.sass */
-.navbar-fixed-left ul li a:hover {
-  color: #424242;
-}
-/* line 20, ../sass/_menu.sass */
-.navbar-fixed-left ul li .dropdown-menu {
-  margin-top: -50px;
-  margin-left: 200px;
+/* line 79, ../sass/_menu.sass */
+a.brand img {
+  width: 100px;
+  margin-left: 50px;
+  background-color: white;
+  border-radius: 10px;
 }
 
 /* line 5, ../sass/main.sass */
@@ -44,10 +76,10 @@ html, body {
 /* line 13, ../sass/main.sass */
 .content {
   margin-left: 200px;
-  padding: 100px;
+  padding: 50px;
 }
 
 /* line 17, ../sass/main.sass */
-.chart {
-  height: 600px;
+.chart, .highcharts-container {
+  height: 80vh;
 }
