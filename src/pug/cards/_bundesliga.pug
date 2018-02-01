@@ -1,0 +1,27 @@
+div(id='points').card.card-block
+  h4.card-title Bundesliga Points
+  h6 Total points by match day
+  .card-block
+    .chart(id='points_chart')
+
+div(id='pointsP').card.card-block
+  h4.card-title Bundesliga Points %
+  h6 Percentage of points received out of all possible points (3 per match day)
+  h6 
+  .card-block
+    .chart(id='points_percent_chart')
+
+div(id='placeP').card.card-block
+  h4.card-title Bundesliga Place %
+  h6 Points compared to the first place (in Percent)
+  .card-block
+    .chart(id='place_percent_chart')
+
+div(id='place').card.card-block
+  h4.card-title Bundesliga Place
+  h6 Placement in the league table
+  .card-block
+    .chart(id='place_chart')
+
+
+script(src='chart.js')

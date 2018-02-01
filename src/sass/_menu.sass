@@ -1,0 +1,36 @@
+.navbar-fixed-left
+  // Position
+  position: fixed
+  left: 0
+  width: $navWidth
+  height: 100%
+  padding: 0px
+  padding-top: $navTopPadding
+  // Style
+  background-color: $navColor
+  border-radius: 0
+  border-right: $navBorderWidth solid $navBorderColor
+  ul
+    margin-top: 50px
+    li
+      width: 100%
+      text-align: center
+      .nav-link
+        padding-top: $navlinkPadding
+        padding-bottom: $navlinkPadding
+        margin-top: $navlinkMargin
+        margin-bottom: $navlinkMargin
+        background-color: $navlinkBGColor
+        border: $navlinkBorderWidth $navlinkBorderColor solid
+        border-left: 0px
+        border-right: 0px
+        &:hover
+          background-color: $navlinkHoverColor
+
+a.brand
+  padding: 0px
+  img
+    width: $navWidth / 2
+    margin-left: $navWidth / 4
+    background-color: white
+    border-radius: 10px

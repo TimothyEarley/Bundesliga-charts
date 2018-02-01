@@ -1,0 +1,35 @@
+{
+  "name": "bundesliga-graphs",
+  "version": "1.0.0",
+  "description": "Graphs points and places for the Bundesliga table",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TimothyEarley/Bundesliga-charts.git"
+  },
+  "keywords": [
+    "bundeliga",
+    "graphs"
+  ],
+  "author": "Timothy Earley",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TimothyEarley/Bundesliga-charts/issues"
+  },
+  "homepage": "https://github.com/TimothyEarley/Bundesliga-charts#readme",
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-coffeescript": "0.0.15",
+    "gulp-filter": "^5.1.0",
+    "gulp-pug": "^3.3.0",
+    "gulp-sass": "^3.1.0"
+  },
+  "dependencies": {
+    "bootstrap": "^4.0.0-alpha.2",
+    "highcharts": "^6.0.5",
+    "jquery": "^3.3.1"
+  }
+}
