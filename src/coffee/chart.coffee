@@ -57,7 +57,7 @@ optionsPlace = {
   series: []
 }
 
-$.getJSON 'https://www.openligadb.de/api/getmatchdata/bl1/2017', (matchArray) ->
+$.getJSON 'https://www.openligadb.de/api/getmatchdata/bl1/2018', (matchArray) ->
 
   teams = [] # [team: [match: points]]
 
