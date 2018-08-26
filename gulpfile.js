@@ -11,7 +11,7 @@ const coffee_src = src + 'coffee/**/*.coffee'
 const pug_src = src + 'pug/**/*.pug'
 const assets_src = src + 'assets/**/*'
 
-const out = './out/'
+const out = './docs/'
 
 gulp.task('coffee', function() {
   return gulp.src(coffee_src)
@@ -35,7 +35,7 @@ gulp.task('pug', function() {
 
 gulp.task('assets', function() {
   return gulp.src(assets_src)
-             .pipe(gulp.dest(out));
+             .pipe(gulp.dest(out + 'assets'));
 });
 
 gulp.task('vendor', function() {
