@@ -4,33 +4,29 @@
   left: 0
   width: $navWidth
   height: 100%
-  padding: 0px
+  padding: 0px !important
   padding-top: $navTopPadding
   // Style
   background-color: $navColor
   border-radius: 0
   border-right: $navBorderWidth solid $navBorderColor
   ul
-    margin-top: 50px
+    width: 100%
+    margin-bottom: 180px 
     li
       width: 100%
       text-align: center
       .nav-link
+
+        font-size: 1.5em
         padding-top: $navlinkPadding
         padding-bottom: $navlinkPadding
         margin-top: $navlinkMargin
         margin-bottom: $navlinkMargin
         background-color: $navlinkBGColor
+        color: $navlinkColor
         border: $navlinkBorderWidth $navlinkBorderColor solid
         border-left: 0px
         border-right: 0px
         &:hover
           background-color: $navlinkHoverColor
-
-a.brand
-  padding: 0px
-  img
-    width: $navWidth / 2
-    margin-left: $navWidth / 4
-    background-color: white
-    border-radius: 10px

@@ -1,22 +1,30 @@
 const gulp = require('gulp');
 const gutil = require('gulp-util');
-const coffeescript = require('gulp-coffeescript');
 const sass = require('gulp-sass');
 const pug = require('gulp-pug');
 const filter = require('gulp-filter');
+var webserver = require('gulp-webserver');
 
 const src = './src/'
 const sass_src = src + 'sass/**/*.sass'
-const coffee_src = src + 'coffee/**/*.coffee'
+const js_src = src + 'js/**/*.js'
 const pug_src = src + 'pug/**/*.pug'
 const assets_src = src + 'assets/**/*'
 
 const out = './docs/'
 
-gulp.task('coffee', function() {
-  return gulp.src(coffee_src)
-             .pipe(coffeescript({bar: true}).on('error', gutil.log))
-             .pipe(gulp.dest(out));
+gulp.task('webserver', function() {
+  gulp.src(out)
+    .pipe(webserver({
+      livereload: true,
+      directoryListing: false,
+      open: false
+    }));
+});
+
+gulp.task('js', function() {
+  return gulp.src(js_src)
+             .pipe(gulp.dest(out))
 });
 
 gulp.task('sass', function () {
@@ -48,22 +56,5 @@ gulp.task('vendor', function() {
   .pipe(gulp.dest(out + 'vendor'));
 });
 
-
-gulp.task('coffee:watch', function () {
-  return gulp.watch(coffee_src, gulp.parallel('coffee'));
-});
-
-gulp.task('sass:watch', function () {
-  return gulp.watch(sass_src, gulp.parallel('sass'));
-});
-
-gulp.task('pug:watch', function () {
-  return gulp.watch(pug_src, gulp.parallel('pug'));
-});
-
-gulp.task('assets:watch', function () {
-  return gulp.watch(assets_src, gulp.parallel('assets'));
-});
-
-gulp.task('default', gulp.parallel('coffee', 'sass', 'pug', 'assets', 'vendor'))
-gulp.task('watch', gulp.parallel('coffee:watch', 'sass:watch', 'pug:watch', 'assets:watch', 'vendor'))
+gulp.task('default', gulp.parallel('js', 'sass', 'pug', 'assets', 'vendor'))
+gulp.task('dev', gulp.parallel('default', 'webserver'))

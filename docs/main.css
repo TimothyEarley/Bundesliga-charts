@@ -3,35 +3,30 @@
   left: 0;
   width: 200px;
   height: 100%;
-  padding: 0px;
+  padding: 0px !important;
   padding-top: 50px;
   background-color: rgba(26, 26, 26, 0.8);
   border-radius: 0;
   border-right: 2px solid #000; }
   .navbar-fixed-left ul {
-    margin-top: 50px; }
+    width: 100%;
+    margin-bottom: 180px; }
     .navbar-fixed-left ul li {
       width: 100%;
       text-align: center; }
       .navbar-fixed-left ul li .nav-link {
+        font-size: 1.5em;
         padding-top: 10px;
         padding-bottom: 10px;
         margin-top: 10px;
         margin-bottom: 10px;
-        background-color: rgba(112, 112, 112, 0.54);
+        background-color: rgba(77, 240, 252, 0.3);
+        color: white !important;
         border: 2px #000 solid;
         border-left: 0px;
         border-right: 0px; }
         .navbar-fixed-left ul li .nav-link:hover {
-          background-color: rgba(77, 75, 75, 0.72); }
-
-a.brand {
-  padding: 0px; }
-  a.brand img {
-    width: 100px;
-    margin-left: 50px;
-    background-color: white;
-    border-radius: 10px; }
+          background-color: rgba(77, 240, 252, 0.75); }
 
 html, body {
   height: 100%;
