@@ -1,18 +1,28 @@
 {
-  "name": "bundesliga-graphs",
-  "version": "1.0.0",
+  "name": "bundesliga-charts",
+  "version": "2.0.0",
   "description": "Graphs points and places for the Bundesliga table",
-  "main": "index.js",
   "scripts": {
-    "build": "gulp",
-    "dev": "gulp dev"
+    "build": "concurrently npm:build-*",
+    "dev": "concurrently npm:dev-server npm:watch-*",
+    "dev-server": "lite-server --baseDir=docs",
+    "build-pug": "pug src/pug/index.pug -o docs",
+    "watch-pug": "pug -w src/pug/index.pug -o docs",
+    "build-js": "mkdir -p docs && uglifyjs --compress --mangle -o docs/main.min.js -- src/js/**.js",
+    "watch-js": "nodemon --watch src -e js -x 'npm run build-js'",
+    "build-sass": "sass src/sass/main.scss --style compressed --no-source-map docs/main.min.css",
+    "watch-sass": "sass --watch src/sass/main.scss --style compressed --no-source-map docs/main.min.css",
+    "postinstall": "node ./node_modules/frontend-dependencies/index.js",
+    "build-dist": "frontend-dependencies",
+    "watch-dist": "npm run build-dist",
+    "clean": "rimraf ./docs"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TimothyEarley/Bundesliga-charts.git"
   },
   "keywords": [
-    "bundeliga",
+    "bundesliga",
     "graphs"
   ],
   "author": "Timothy Earley",
@@ -22,17 +32,24 @@
   },
   "homepage": "https://github.com/TimothyEarley/Bundesliga-charts#readme",
   "devDependencies": {
-    "coffeescript": "^2.3.2",
-    "gulp": "^4.0.0",
-    "gulp-filter": "^5.1.0",
-    "gulp-pug": "^3.3.0",
-    "gulp-sass": "^3.2.1",
-    "gulp-webserver": "^0.9.1",
-    "node-sass": "^4.12.0"
+    "concurrently": "5.3.0",
+    "lite-server": "^2.6.1",
+    "nodemon": "2.0.4",
+    "pug-cli": "1.0.0-alpha6",
+    "rimraf": "3.0.2",
+    "sass": "^1.29.0",
+    "uglify-es": "3.3.9"
   },
   "dependencies": {
-    "bootstrap": "^4.3.1",
-    "highcharts": "^6.2.0",
-    "jquery": "^3.4.1"
+    "frontend-dependencies": "1.1.8"
+  },
+  "frontendDependencies": {
+    "target": "docs/vendor",
+    "packages": {
+      "chart.js": {
+        "version": "2.8.0",
+        "src": "dist/Chart.bundle.min.js"
+      }
+    }
   }
 }

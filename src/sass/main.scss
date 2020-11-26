@@ -1,0 +1,60 @@
+@import '_colours';
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
+
+.chart-container {
+	position: relative;
+	height: 80vh;
+	width: 80vw;
+	margin: 30px auto;
+}
+
+.chart-container:not(:first-of-type) {
+	padding-top: 80px;
+}
+
+html {
+	background-color: $bg;
+}
+
+canvas {
+	background-color: $bg;
+}
+
+h1 {
+	font-family: 'Comfortaa', cursive;
+	margin-top: 50px;
+	text-decoration: underline;
+}
+
+
+h1, h2 {
+	color: $text_fg;
+	width: 100%;
+	text-align: center;
+}
+
+select {
+	width: 15em;
+	height: 3em;
+
+	padding: 5px;
+
+	display: block;
+	margin: 0 auto;
+}
+
+.footer {
+	color: $text_fg;
+	margin-top: 100px;
+	border-top: 1px solid gray;
+	width: 100%;
+	text-align: center;
+}
+
+a:visited {
+	color: #f781f7;
+}
+a:not(:visited) {
+	color: #54d4ff;
+}
