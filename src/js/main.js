@@ -1,12 +1,29 @@
 // to destroy them when reloading
 var charts = [];
 
+// simple cache to avoid calling the API with same parameters, does not persist
+// also no fancy debouncing. TODO cache the computations
+var cache = new Map();
+
+async function fetchWithCache(url) {
+	if (cache.has(url)) {
+		console.log("Cached: " + url)
+		return cache.get(url);
+	} else {
+		console.log("Fetching: " + url)
+		const result = await fetch(url);
+		const data = await result.json();
+		cache.set(url, data);
+		return data;
+	}
+}
+
+const apiURL = "https://www.openligadb.de/api/getmatchdata/"
 
 async function fetchData(league, season) {
-	const url = "https://www.openligadb.de/api/getmatchdata/" + league + "/" + season;
-	console.log(url);
-	const result = await fetch(url);
-	const matches = (await result.json()).filter(m => m.MatchIsFinished);
+	const url = apiURL + league + "/" + season;
+	const result = await fetchWithCache(url);
+	const matches = result.filter(m => m.MatchIsFinished);
 
 	// Day => Matches
 	const matchdays = matches.groupBy(m => m.Group.GroupOrderID)
@@ -188,11 +205,47 @@ function chartTeamPoints(team, points, width, ctx) {
 	}
 }
 
+// fill in the available seasons
+async function addSeasons(seasonSel) {
+	// in order to avoid having to hard-code a switch between seasons, try to get the current year/year+1 season, 
+	// and if there are no games then (year-1)/year is the current one
+	const currentYear = new Date().getFullYear();
+	var latestSeason = currentYear;
+
+	const matches = await fetchWithCache(apiURL + 'bl1/' + currentYear);
+	if (matches.length == 0) {
+		latestSeason = currentYear - 1;
+	}
+
+	// clear options just in case
+	while (seasonSel.hasChildNodes()) {
+		seasonSel.removeChild(seasonSel.lastChild);
+	}
+	const startYear = 2002;
+
+	for (year = latestSeason; year >= startYear; year--) {
+		const opt = document.createElement('option');
+		opt.value = year;
+		opt.innerHTML = year + "/" + (year + 1).toString().substr(-2);
+		opt.selected = year == latestSeason;
+		seasonSel.appendChild(opt);
+	}
+
+}
+
+
+var leagueSel, seasonSel
+function load() {
+	fetchData(leagueSel.value, seasonSel.value);
+}
+
 var toggle3 = true;
 // ui hook
-function load() {
-	const leagueSel = document.getElementById('league');
-	const seasonSel = document.getElementById('season');
+async function init() {
+	console.log("Init")
+	leagueSel = document.getElementById('league');
+	seasonSel = document.getElementById('season');
+	
 	// for stripe chart
 	document.getElementById('toggle3').addEventListener('change', () => {
 		toggle3 = !toggle3;
@@ -201,7 +254,9 @@ function load() {
 		});
 
 	});
-	fetchData(leagueSel.value, seasonSel.value);
+
+	await addSeasons(seasonSel);
+	load();
 }
 
-window.onload = () => load();
+window.onload = () => init();

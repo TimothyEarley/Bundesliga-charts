@@ -1,4 +1,4 @@
-// only use *full* hex colors, or everytgin breaks
+// only use *full* hex colors, or everything breaks
 
 const colorMap = new Map();
 
@@ -17,6 +17,7 @@ colorMap.set("Bayer Leverkusen", ['#e4210b', '#e4210b']);
 colorMap.set("1. FSV Mainz 05", ['#e62100', '#e62100']);
 colorMap.set("VfB Stuttgart", ['#f22b1a', '#ffffff']);
 colorMap.set("BV Borussia Dortmund 09", ['#ffe800', '#ffe800']);
+colorMap.set("Borussia Dortmund", ['#ffe800', '#ffe800']);
 colorMap.set("RB Leipzig", ['#e0223c', '#e0223c']);
 colorMap.set("Fortuna Düsseldorf", ['#ffffff', '#ffffff']);
 colorMap.set("1. FC Nürnberg", ['#ad1732', '#ad1732']);
@@ -24,13 +25,15 @@ colorMap.set("SC Paderborn 07", ['#005ea8', '#005ea8']);
 colorMap.set("1. FC Union Berlin", ['#d20303', '#feec83']);
 colorMap.set("1. FC Köln", ['#ffffff', '#eb2206']);
 colorMap.set("Arminia Bielefeld", ['#015092', '#000000'])
-//colorMap.set("Hamburger SV", '#004087 ');
+colorMap.set("VfL Bochum", ['#005ca3', '#ffffff'])
+colorMap.set("SpVgg Greuther Fürth", ['#009932', '#ffffff'])
 
 
 function getColor(team) {
 	if (colorMap.has(team)) {
 		return colorMap.get(team);
 	} else {
+		console.log("No colour predefined for " + team)
 		const hue = getRndInteger(0, 360)
 		const hsl = "hsl(" + hue + ",100%,50%)";
 		const c = [hsl, hsl]
