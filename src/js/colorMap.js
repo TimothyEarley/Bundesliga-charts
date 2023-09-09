@@ -27,6 +27,8 @@ colorMap.set("1. FC Köln", ['#ffffff', '#eb2206']);
 colorMap.set("Arminia Bielefeld", ['#015092', '#000000'])
 colorMap.set("VfL Bochum", ['#005ca3', '#ffffff'])
 colorMap.set("SpVgg Greuther Fürth", ['#009932', '#ffffff'])
+colorMap.set("1. FC Heidenheim 1846", ['#ea3323', '#1a42f5'])
+colorMap.set("SV Darmstadt 98", ['#1d499a', '#ffffff'])
 
 
 function getColor(team) {
