@@ -31,6 +31,17 @@ Array.prototype.sortBy = function(prop) {
 	return this.sort((a, b) => prop(a) - prop(b))
 }
 
+Array.prototype.runningFold = function (initial, op) {
+	const result = []
+	let current = initial
+	this.forEach((v) => {
+		const next = op(current, v)
+		result.push(next)
+		current = next
+	})
+	return result
+}
+
 function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min) ) + min;
 }

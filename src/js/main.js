@@ -8,6 +8,17 @@ var cache = new Map();
 const corsProxy = "https://corsproxy.io/?"
 const apiURL = "https://www.openligadb.de/api/getmatchdata/"
 
+async function fetchWithRetry(url) {
+	while (true) {
+		try {
+			return await fetch(url)
+		} catch (e) {
+			console.log('Rate limit!')
+			await new Promise(r => setTimeout(r, 60 * 1000));
+		}
+	}
+}
+
 async function fetchWithCache(url) {
 	if (cache.has(url)) {
 		console.log("Cached: " + url)
@@ -15,14 +26,14 @@ async function fetchWithCache(url) {
 	} else {
 		console.log("Fetching: " + url)
 		const fullUrl = corsProxy + encodeURIComponent(apiURL + url)
-		const result = await fetch(fullUrl);
+		const result = await fetchWithRetry(fullUrl);
 		const data = await result.json();
 		cache.set(url, data);
 		return data;
 	}
 }
 
-async function fetchData(league, season) {
+async function fetchRealMatchData(league, season) {
 	const url = league + "/" + season;
 	const result = await fetchWithCache(url);
 	const matches = result.filter(m => m.matchIsFinished);
@@ -102,6 +113,16 @@ function sortMatchdays(teams) {
 	);
 }
 
+function pointsFromScore(goals1, goals2) {
+	if (goals1 > goals2) {
+		return [3, 0]
+	} else if (goals1 < goals2) {
+		return [0, 3]
+	} else {
+		return [1, 1]
+	}
+}
+
 function extractMatchInfo(match) {
 	if (!match.matchResults[0]) {
 		console.log("No match data!", match);
@@ -111,17 +132,7 @@ function extractMatchInfo(match) {
 	const goals1 = result.pointsTeam1;
 	const goals2 = result.pointsTeam2;
 
-	var points1, points2;
-	if (goals1 > goals2) {
-		points1 = 3;
-		points2 = 0;
-	} else if (goals1 < goals2) {
-		points1 = 0;
-		points2 = 3;
-	} else {
-		points1 = 1;
-		points2 = 1;
-	}
+	const [points1, points2] = pointsFromScore(goals1, goals2);
 
 	return {
 		team1: match.team1.teamName,
@@ -237,8 +248,11 @@ async function addSeasons(seasonSel) {
 
 
 var leagueSel, seasonSel
+
+// called from html
 function load() {
-	fetchData(leagueSel.value, seasonSel.value);
+	fetchRealMatchData(leagueSel.value, seasonSel.value);
+	prognoseToTable(leagueSel.value, seasonSel.value)
 }
 
 var toggle3 = true;
@@ -258,7 +272,7 @@ async function init() {
 	});
 
 	await addSeasons(seasonSel);
-	load();
+	await load()
 }
 
 window.onload = () => init();
