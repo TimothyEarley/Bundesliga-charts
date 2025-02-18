@@ -32,16 +32,16 @@
   },
   "homepage": "https://github.com/TimothyEarley/Bundesliga-charts#readme",
   "devDependencies": {
-    "concurrently": "6.3.0",
+    "@tokilabs/pug3-cli": "^3.0.1",
+    "concurrently": "9.1.2",
     "lite-server": "2.6.1",
-    "nodemon": "2.0.13",
-    "@anduh/pug-cli": "1.0.0-alpha8",
-    "rimraf": "3.0.2",
-    "sass": "1.42.1",
+    "nodemon": "3.1.9",
+    "rimraf": "6.0.1",
+    "sass": "1.85.0",
     "uglify-es": "3.3.9"
   },
   "dependencies": {
-    "frontend-dependencies": "1.1.8"
+    "frontend-dependencies": "2.0.1"
   },
   "frontendDependencies": {
     "target": "docs/vendor",
@@ -51,5 +51,6 @@
         "src": "dist/Chart.bundle.min.js"
       }
     }
-  }
+  },
+  "packageManager": "pnpm@10.4.1+sha512.c753b6c3ad7afa13af388fa6d808035a008e30ea9993f58c6663e2bc5ff21679aa834db094987129aa4d488b86df57f7b634981b2f827cdcacc698cc0cfb88af"
 }
