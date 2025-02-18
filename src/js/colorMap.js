@@ -30,6 +30,7 @@ colorMap.set("SpVgg Greuther Fürth", ['#009932', '#ffffff'])
 colorMap.set("1. FC Heidenheim 1846", ['#ea3323', '#1a42f5'])
 colorMap.set("SV Darmstadt 98", ['#1d499a', '#ffffff'])
 colorMap.set("Holstein Kiel", ['#005497', '#f7f7f7'])
+colorMap.set('FC St. Pauli', ['#5c4531', '#f7f7f7'])
 
 
 function getColor(team) {

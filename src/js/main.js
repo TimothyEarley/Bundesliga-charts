@@ -178,6 +178,7 @@ function chartIt(chart, data, labels, width, reverse) {
 	});
 }
 
+//TODO OpenLigaDB has icons, maybe we can use them?
 function chartTeamPoints(team, points, width, ctx) {
 	const [color, secondaryColor] = getColor(team);
 	// console.log(team + ": " + color);
@@ -238,6 +239,7 @@ async function addSeasons(seasonSel) {
 var leagueSel, seasonSel
 function load() {
 	fetchData(leagueSel.value, seasonSel.value);
+	createPredictions(seasonSel.value)
 }
 
 var toggle3 = true;
