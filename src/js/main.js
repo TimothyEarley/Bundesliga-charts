@@ -5,19 +5,18 @@ var charts = [];
 // also no fancy debouncing. TODO cache the computations
 var cache = new Map();
 
-const corsProxy = "https://corsproxy.io/?"
-const apiURL = "https://www.openligadb.de/api/getmatchdata/"
+const apiURL = "https://api.openligadb.de/getmatchdata/"
 
-async function fetchWithCache(url) {
-	if (cache.has(url)) {
-		console.log("Cached: " + url)
-		return cache.get(url);
+async function fetchWithCache(path) {
+	if (cache.has(path)) {
+		console.log("Cached: " + path)
+		return cache.get(path);
 	} else {
-		console.log("Fetching: " + url)
-		const fullUrl = corsProxy + encodeURIComponent(apiURL + url)
+		console.log("Fetching: " + path)
+		const fullUrl = apiURL + path
 		const result = await fetch(fullUrl);
 		const data = await result.json();
-		cache.set(url, data);
+		cache.set(path, data);
 		return data;
 	}
 }
@@ -197,7 +196,7 @@ function chartTeamPoints(team, points, width, ctx) {
 		width: Array(100).fill(width),
 		fill: false,
 		borderColor: gradient,
-		backgroundColor: w3color(color).toHexString() + '08', // add alpha value
+		backgroundColor: w3color(color).toHexString() + '16', // add alpha value
 		borderWidth: 2,
 		lineTension: 0.2, // closer to 0 => straight lines
 		pointStyle: 'point',

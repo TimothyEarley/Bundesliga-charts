@@ -4,10 +4,10 @@ Chart.controllers.stripe = Chart.controllers.line.extend({
     var result = Chart.controllers.line.prototype.draw.call(this, arguments);
 
     var meta = this.getMeta();
-		var ctx = this.chart.chart.ctx;
-		var yScale = this.getScaleForId(meta.yAxisID);
-		var yScaleZeroPixel = yScale.getPixelForValue(0);
-		var widths = this.getDataset().width;
+	var ctx = this.chart.chart.ctx;
+	var yScale = this.getScaleForId(meta.yAxisID);
+	var yScaleZeroPixel = yScale.getPixelForValue(0);
+	var widths = this.getDataset().width;
 
     if (toggle3) {
       ctx.save();
