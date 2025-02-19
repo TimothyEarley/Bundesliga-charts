@@ -43,7 +43,6 @@ async function fetchData(league, season) {
 		return acc;
 	}, []));
 
-
 	const matchdayCount = Math.max(...matches.map(m => m.group.groupOrderID), 0);
 	// console.log("Match days with data: " + matchdayCount);
 	const labels = Array.from(Array(matchdayCount), (_, i) => i + 1);
@@ -72,10 +71,14 @@ async function fetchData(league, season) {
 		c.destroy()
 	});
 
+	// Predictions
+	const predictionPoints = await createPredictions(league, season)
 
 	charts.push(chartIt("pointChart", accTeamPoints, labels, 3, false));
 	charts.push(chartIt("percentChart", percentTeamPoints, labels, 0, false));
 	charts.push(chartIt("place", placement, labels, 0, true));
+	charts.push(chartIt("prediction", predictionPoints, labels, 0, false));
+
 }
 
 function groupMatchesByTeam(matchdays) {
@@ -84,7 +87,10 @@ function groupMatchesByTeam(matchdays) {
 	for ([day, matchesOnDay] of matchdays) {
 		for (match of matchesOnDay) {
 			const info = extractMatchInfo(match);
-			if (!info) continue;
+			if (!info) {
+				console.log("No match data!", match);
+				continue;
+			}
 			if (!teams.has(info.team1)) teams.set(info.team1, new Map());
 			teams.get(info.team1).set(day, info.points1);
 			if (!teams.has(info.team2)) teams.set(info.team2, new Map());
@@ -103,8 +109,10 @@ function sortMatchdays(teams) {
 
 function extractMatchInfo(match) {
 	if (!match.matchResults[0]) {
-		console.log("No match data!", match);
-		return null;
+		return {
+			team1: match.team1.teamName,
+			team2: match.team2.teamName
+		};
 	}
 	const result = match.matchResults.find((result) => result.resultName == "Endergebnis");
 	const goals1 = result.pointsTeam1;
@@ -239,7 +247,6 @@ async function addSeasons(seasonSel) {
 var leagueSel, seasonSel
 function load() {
 	fetchData(leagueSel.value, seasonSel.value);
-	createPredictions(seasonSel.value)
 }
 
 var toggle3 = true;

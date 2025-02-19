@@ -31,6 +31,12 @@ Array.prototype.sortBy = function(prop) {
 	return this.sort((a, b) => prop(a) - prop(b))
 }
 
+Array.prototype.sum = function() {
+	let sum = 0
+	this.forEach(v => sum += v)
+	return sum
+}
+
 function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min) ) + min;
 }
