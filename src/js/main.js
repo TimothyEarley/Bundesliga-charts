@@ -147,7 +147,7 @@ function chartIt(chart, data, labels, width, reverse) {
 		data: {
 			labels: labels,
 			datasets: data.toArray()
-				.map(([team, points]) => chartTeamPoints(team, points, width, ctx))
+				.map(([team, points]) => chartTeamPoints(team, points, width, ctx, labels.length))
 		},
 		options: {
 			responsive: true,
@@ -187,16 +187,18 @@ function chartIt(chart, data, labels, width, reverse) {
 }
 
 //TODO OpenLigaDB has icons, maybe we can use them?
-function chartTeamPoints(team, points, width, ctx) {
-	const [color, secondaryColor] = getColor(team);
+function chartTeamPoints(team, points, width, ctx, xStops) {
+	const colors = getColor(team);
 	// console.log(team + ": " + color);
 
 	var contentWidth = window.innerWidth || document.body.clientWidth;
 	const gradient = ctx.createLinearGradient(0, 0, contentWidth, 0);
-	const steps = contentWidth / 50;
-	for (var i = 1; i < steps; i++) {
-		gradient.addColorStop(i / steps - 1 / steps, color);
-		gradient.addColorStop(i / steps, secondaryColor);
+	const steps = contentWidth / 20;
+	for (var i = 0; i <= steps ; i++) {
+		gradient.addColorStop(i / steps, colors[i % colors.length]);
+		// make sharper than linear
+		if (i + 1 < steps)
+			gradient.addColorStop((i + 0.99) / steps, colors[i % colors.length]);
 	}
 
 	return {
@@ -205,11 +207,11 @@ function chartTeamPoints(team, points, width, ctx) {
 		width: Array(100).fill(width),
 		fill: false,
 		borderColor: gradient,
-		backgroundColor: w3color(color).toHexString() + '16', // add alpha value
+		backgroundColor: w3color(colors[0]).toHexString() + '16', // add alpha value
 		borderWidth: 2,
-		lineTension: 0.2, // closer to 0 => straight lines
+		lineTension: 0.1, // closer to 0 => straight lines
 		pointStyle: 'point',
-		pointRadius: 2,
+		pointRadius: 3,
 		pointHoverRadius: 4,
 		pointBorderWidth: 2,
 	}
