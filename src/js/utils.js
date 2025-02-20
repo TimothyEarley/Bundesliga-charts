@@ -37,6 +37,10 @@ Array.prototype.sum = function() {
 	return sum
 }
 
+Array.prototype.min = function() {
+	return Math.min.apply(null, this)
+}
+
 function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min) ) + min;
 }
